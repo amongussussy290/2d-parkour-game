@@ -87,6 +87,7 @@ local function victoryPlatformTouched(part)
 		--gives +1 Wins in leaderstats value "Wins"
 		local player = game.Players:FindFirstChild(playerName)
 		PlayerStatManager:ChangeStat(player, "Wins", 1)
+		print(playerName, " made it to the end first!")
 
 		canUseVictory = false
 		--teleports everyone back to spawn
