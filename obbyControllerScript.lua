@@ -1,55 +1,55 @@
 --important variables and functions used in the code
 
-	--services for determining if a player joins
-	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
-	--variables used to track game data
-	local lastCheckpoint = nil
-	--offset variable used for teleportation, makes sure player isnt in a block
-	local offset = Vector3.new(0,2,0)
-	--variable assigned to victoryPlatform
-	local victoryPlatform = game.Workspace.victoryPlatform
-	-- checks if part touching assigned part is a humanoid
-	local function isHuman(part)
-		local hum = part.Parent:FindFirstChild("HumanoidRootPart")
-		return hum
-	end
-	-- calls module PlayerStatManager
-	local PlayerStatManager = require(game.ServerScriptService.PlayerStatManager)
-	--global debounce
-	canUseVictory = true
-	canUseRandomize = true
+--services for determining if a player joins
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+--variables used to track game data
+local lastCheckpoint = nil
+--offset variable used for teleportation, makes sure player isnt in a block
+local offset = Vector3.new(0,2,0)
+--variable assigned to victoryPlatform
+local victoryPlatform = game.Workspace.victoryPlatform
+-- checks if part touching assigned part is a humanoid
+local function isHuman(part)
+	local hum = part.Parent:FindFirstChild("HumanoidRootPart")
+	return hum
+end
+-- calls module PlayerStatManager
+local PlayerStatManager = require(game.ServerScriptService.PlayerStatManager)
+--global debounce
+canUseVictory = true
+canUseFirstRandomize = true
 --
 
 
 
---code for randomizing the lobby
+--code for randomizing the obby
 
-	--gives a random obstacle from the set of 8
-	function giveRandomObstacle()
-		local selectedObstacle = math.random(1,8)
-		if selectedObstacle == 1 then
-			return game.Workspace.Stages.stage1
-		elseif selectedObstacle == 2 then
-			return game.Workspace.Stages.stage2
-		elseif selectedObstacle == 3 then
-			return game.Workspace.Stages.stage3
-		elseif selectedObstacle == 4 then
-			return game.Workspace.Stages.stage4
-		elseif selectedObstacle == 5 then
-			return game.Workspace.Stages.stage5
-		elseif selectedObstacle == 6 then
-			return game.Workspace.Stages.stage6
-		elseif selectedObstacle == 7 then
-			return game.Workspace.Stages.stage7
-		elseif selectedObstacle == 8 then
-			return game.Workspace.Stages.stage8
-		end
+--gives a random obstacle from the set of 8
+function giveRandomObstacle()
+	local selectedObstacle = math.random(1,8)
+	if selectedObstacle == 1 then
+	return game.Workspace.Stages.stage1
+	elseif selectedObstacle == 2 then
+		return game.Workspace.Stages.stage2
+	elseif selectedObstacle == 3 then
+		return game.Workspace.Stages.stage3
+	elseif selectedObstacle == 4 then
+		return game.Workspace.Stages.stage4
+	elseif selectedObstacle == 5 then
+		return game.Workspace.Stages.stage5
+	elseif selectedObstacle == 6 then
+		return game.Workspace.Stages.stage6
+	elseif selectedObstacle == 7 then
+		return game.Workspace.Stages.stage7
+	elseif selectedObstacle == 8 then
+		return game.Workspace.Stages.stage8
 	end
+end
 
 
-	--uses giveRandomObstacle to randomly swap obstacles
-	function randomizeObstacles() -- randomizes obstacles
+--uses giveRandomObstacle to randomly swap obstacles
+function randomizeObstacles() -- randomizes obstacles
 		for i = 1, 8, 1 do
 			local chosenObstacle1 = giveRandomObstacle()
 			local chosenObstacle2 = giveRandomObstacle()
@@ -61,7 +61,7 @@
 		print("randomizeObstacles cooldown actiavted")
 		task.wait(5)
 		print("randomizeObstacles cooldown ended")
-	end
+end
 
 
 --
@@ -134,8 +134,8 @@ end
 
 	--randomizes obstacles when a player joins (uses services at the top) if it's the first time
 	game.Players.PlayerAdded:Connect(function()
-		if canUseRandomize then
-			canUseRandomize = false
+		if canUseFirstRandomize then
+			canUseFirstRandomize = false
 			for i = 1, 8, 1 do
 				local chosenObstacle1 = giveRandomObstacle()
 				local chosenObstacle2 = giveRandomObstacle()
