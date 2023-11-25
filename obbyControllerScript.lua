@@ -1,24 +1,24 @@
 --important variables and functions used in the code
 
 --services for determining if a player joins
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
---variables used to track game data
-local lastCheckpoint = nil
---offset variable used for teleportation, makes sure player isnt in a block
-local offset = Vector3.new(0,2,0)
---variable assigned to victoryPlatform
-local victoryPlatform = game.Workspace.victoryPlatform
--- checks if part touching assigned part is a humanoid
-local function isHuman(part)
-	local hum = part.Parent:FindFirstChild("HumanoidRootPart")
-	return hum
-end
--- calls module PlayerStatManager
-local PlayerStatManager = require(game.ServerScriptService.PlayerStatManager)
---global debounce
-canUseVictory = true
-canUseFirstRandomize = true
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	--variables used to track game data
+	local lastCheckpoint = nil
+	--offset variable used for teleportation, makes sure player isnt in a block
+	local offset = Vector3.new(0,2,0)
+	--variable assigned to victoryPlatform
+	local victoryPlatform = game.Workspace.victoryPlatform
+	-- checks if part touching assigned part is a humanoid
+	local function isHuman(part)
+		local hum = part.Parent:FindFirstChild("HumanoidRootPart")
+		return hum
+	end
+	-- calls module PlayerStatManager
+	local PlayerStatManager = require(game.ServerScriptService.PlayerStatManager)
+	--global debounce
+	canUseVictory = true
+	canUseFirstRandomize = true
 --
 
 
@@ -74,6 +74,8 @@ end
 		local hum = isHuman(part)
 		if hum then
 			hum.CFrame = lastCheckpoint.CFrame + offset
+
+			print(hum,"has teleported to a checkpoint")
 		end
 	end
 --
@@ -119,6 +121,7 @@ end
 				local hum = isHuman(part)
 				if hum then
 					lastCheckpoint = object
+					print(hum, "has touched a checkpoint")
 				end
 			end)
 		end
