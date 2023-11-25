@@ -11,3 +11,6 @@ Manages the function of the obby, such as setting checkpoints or randomizing the
 
 PlayeerStatManager:
 Manages the save data of the player. It can interact with the values from leaderBoardScript.
+
+resetDisable:
+Disables resetting your character as it messes up some game mechnaics.
