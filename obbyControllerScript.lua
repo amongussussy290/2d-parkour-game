@@ -19,7 +19,6 @@
 	--global debounce
 	canUseVictory = true
 	canUseFirstRandomize = true
-	canUseCheckpoint = true
 --
 
 
@@ -120,12 +119,10 @@ end
 		if object.Name == "checkPoint" then
 			object.Touched:Connect(function(part)
 				local hum = isHuman(part)
-				if hum and canUseCheckpoint then
+				if hum and object ~= lastCheckpoint then
 					lastCheckpoint = object
 					print(hum, "has touched a checkpoint")
-					canUseCheckpoint = false
-					task.wait(2.5)
-					canUseCheckpoint = true
+					
 				end
 			end)
 		end
